@@ -1,0 +1,129 @@
+{% extends "portal/basic.html" %} {% load crispy_forms_tags %} {% block body %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<style>
+    .col-md-3 {
+        display: inline-block;
+        margin-left: -4px;
+    }
+    
+    .carousel-indicators .active {
+        background-color: blue;
+    }
+    
+    .col-md-3 img {
+        width: 255px;
+        height: 355px;
+    }
+    
+    body .carousel-indicator li {
+        background-color: blue;
+    }
+    
+    body .carousel-indicators {
+        bottom: 0;
+    }
+    
+    body .carousel-control-prev-icon,
+    body .carousel-control-next-icon {
+        background-color: blue;
+    }
+    
+    body .no-padding {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .carousel-control-next,
+    .carousel-control-prev {
+        top: auto;
+        bottom: auto;
+    }
+    
+    body .carousel-control-prev-icon,
+    body .carousel-control-next-icon {
+        background-color: blue;
+        margin-top: 222px;
+    }
+</style>
+
+<div class="container mt-3">
+
+{% if final %}
+    <form method='POST' action='/results/{{id}}'>{% csrf_token %}
+{% endif %}
+{% if shortlist %}
+    <form method='POST' action='/selectlist/{{id}}'>{% csrf_token %}
+{% endif %}
+
+{% if final or shortlist %}
+
+        <input type="hidden" id="am" name="am" value="{{round1}}">
+        <table class="table table-striped">
+            <thead>
+                <tr class="bg-success">
+                    <th scope="col" style="font-size:24px">#</th>
+                    <th scope="col" style="font-size:24px">STUDENT NAME</th>
+                    <th scope="col" style="font-size:24px">BRANCH</th>
+                    <th scope="col" style="font-size:24px">PROFILE</th>
+                    <th scope="col" style="font-size:24px">ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in apps %}
+                <tr>
+                    <th scope="row">{{c.student.s_id}}</th>
+                    <td style="font-size:20px">{{c.student.user.username}}</td>
+                    <td style="font-size:20px">{{c.student.b_id.b_name}}</td>
+                    <td>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </td>
+                    <td>
+                        <a href="#"><span><i class="fa fa-edit" style="font-size:30px;color:purple" aria-hidden="true"></i></span></a>&nbsp;&nbsp;
+                        <a href="#"><span><i class="fa fa-trash" style="font-size:30px;color:maroon" aria-hidden="true"></i></span></a>&nbsp;&nbsp;
+                        <input type="checkbox" name="name" value='{{c.student.s_id}}' />&nbsp;
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="form-group">
+            <button class="btn btn-outline-info my-3" id='comp' type="submit">Create Shortlist</button>
+        </div>
+    </form>
+
+    {% else %}
+
+        <table class="table table-striped">
+            <thead>
+                <tr class="bg-success">
+                    <th scope="col" style="font-size:24px">#</th>
+                    <th scope="col" style="font-size:24px">STUDENT NAME</th>
+                    <th scope="col" style="font-size:24px">BRANCH</th>
+                    <th scope="col" style="font-size:24px">PROFILE</th>
+                    <!--th scope="col" style="font-size:24px">ACTION</th-->
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in student %}
+                <tr>
+                    <th scope="row">{{c.s_id}}</th>
+                    <td style="font-size:20px">{{c.user.username}}</td>
+                    <td style="font-size:20px">{{c.b_id.b_name}}</td>
+                    <td>
+                        <a href="#" class="btn btn-primary">View Details</a>
+                    </td>
+                    <!--td>
+                        <a href="#"><span><i class="fa fa-edit" style="font-size:30px;color:purple" aria-hidden="true"></i></span></a>&nbsp;&nbsp;
+                        <a href="#"><span><i class="fa fa-trash" style="font-size:30px;color:maroon" aria-hidden="true"></i></span></a>&nbsp;&nbsp;
+                        <input type="checkbox" name="name" value='{{c.student.s_id}}' />&nbsp;
+                    </td-->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+
+{% endblock %} {% block js %}
+
+{% endblock %}

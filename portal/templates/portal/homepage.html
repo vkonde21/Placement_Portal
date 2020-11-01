@@ -1,0 +1,101 @@
+{% extends "portal/basic.html" %} {% block body %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+<div class="container">
+    <div class="navbar nav_title" style="border: 0;">
+        <h3><a href="/home" class="site_title"><i class="fa fa-home"></i> <span>Placement Portal</span></a></h3>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <!-- menu profile quick info -->
+    <div class="profile clearfix">
+        <div class="profile_pic">
+        </div>
+        <!--div class="profile_info">
+            <span><font size="6">Welcome</font></span>
+        </div-->
+    </div>
+    <!-- /menu profile quick info -->
+
+    <br />
+    <!-- sidebar menu -->
+
+    <div class="container">
+
+        {% if a %}
+        <div class="row">
+            <div class="col-sm">
+                <nav class="navbar bg-success">
+                    <ul class="nav navbar-nav">
+                        <li><a><i class="fa fa-user"></i> Students <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a class="btn btn-secondary mx-3" href="/viewstudents">View Students</a></li>
+                                <li><a class="btn btn-secondary mx-3 my-3" href="/feedback">Give Feedback</a></li>
+                                <li><a class="btn btn-secondary mx-3 my-3" href="/verify">Verify Students</a></li>
+                                <!-- 
+                      <li><a href="index3.html">Edit Students</a></li>
+                      <li><a href="index3.html">Delete Students</a></li> -->
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-sm">
+                <nav class="navbar bg-success">
+                    <ul class="nav navbar-nav">
+                        <li><a><i class="far fa-building"></i> Companies <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="/add_company" class="btn btn-secondary mx-3">Add Company</a></li><br>
+                                <li><a href="/viewcompany" class="btn btn-secondary my-3 mx-3">View Company</a></li>
+                                <!-- 
+                      <li><a href="form_validation.html">Edit Company</a></li>
+                      <li><a href="form_wizards.html">Delete Company</a></li> -->
+                            </ul>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-sm">
+                <nav class="navbar bg-success">
+                    <ul class="nav navbar-nav">
+                        <li><a><i class="fa fa-graduation-cap"></i> Placements <span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li><a href="/viewplacements" class="btn btn-secondary mx-3 my-3">View Placements</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        {% else %} {% for i in companies %}
+        <div class="card mx-3 my-3" style="width: 18rem;border:20px;border-color:black">
+            <img class="card-img-top" src="{{i.company.logo.url}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{i.company.c_name}}</h5>
+                <p class="card-text">CTC: Rs.{{i.company.ctc}}</p>
+                <a href="/viewdetails/{{i.company.c_id}}" class="btn btn-primary">View Details</a> {% if i.status == 3 %}
+                <a href="#" class="btn btn-primary">Selected</a> {% elif i.status == 1 %}
+                <a href="/apply/{{i.company.c_id}}" class='btn btn-primary mx-3'>Apply</a> {% elif i.status == 4 %}
+                <a href="#" class="btn btn-primary">Not Selected</a> {% elif i.status == 5%}
+                <a href="/withdraw/{{i.company.c_id}}" class="btn btn-primary mx-3">Withdraw</a> {% elif i.status == 6%}
+                <a href="#" class="btn btn-primary">Not Applied</a> {% else %}
+                <a href="#" class='btn btn-primary'>Not eligible</a> {% endif %}
+            </div>
+        </div>
+        {% endfor %} {% endif %} {% if msg %}
+        <div class="alert alert-info">
+            <strong>Info!</strong> {{msg}}
+        </div>
+        {% endif %}
+    </div>
+
+
+</div>
+
+</div>
+
+
+{% endblock %}

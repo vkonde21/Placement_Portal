@@ -1,0 +1,102 @@
+{% extends "portal/basic.html" %} {% load crispy_forms_tags %} {% block body %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<style>
+    .col-md-3 {
+        display: inline-block;
+        margin-left: -4px;
+    }
+    
+    .carousel-indicators .active {
+        background-color: blue;
+    }
+    
+    .col-md-3 img {
+        width: 255px;
+        height: 355px;
+    }
+    
+    body .carousel-indicator li {
+        background-color: blue;
+    }
+    
+    body .carousel-indicators {
+        bottom: 0;
+    }
+    
+    body .carousel-control-prev-icon,
+    body .carousel-control-next-icon {
+        background-color: blue;
+    }
+    
+    body .no-padding {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .carousel-control-next,
+    .carousel-control-prev {
+        top: auto;
+        bottom: auto;
+    }
+    
+    body .carousel-control-prev-icon,
+    body .carousel-control-next-icon {
+        background-color: blue;
+        margin-top: 222px;
+    }
+</style>
+
+<div class="container jumbotron mt-3">
+
+    <div class="media">
+        <img class="rounded-circle account-img" src="{{company.logo.url }}">
+        <div class="media-body">
+            <h1 class="display-4">{{company.c_name}}</h1>
+        </div>
+    </div>
+
+    <ul class="list-group my-3" style='width:50% ;border: 1px solid black;'>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            Date:
+            <span class="badge badge-primary badge-pill">{{company.doa}}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            CTC:
+            <span class="badge badge-primary badge-pill">{{company.ctc}}</span>
+        </li>
+
+    </ul>
+
+    <ul class="list-group my-3" style='width:50%;border: 1px solid black;'>
+        <li class="list-group-item d-flex justify-content-between align-items-center">Recruitment_details: <br>{{company.recruitment_details}}
+        </li>
+    </ul>
+    <button class="rounded-pill" style="color:black;background-color:purple; height:30px; width:150px">Rounds</button> <br> {% for i, j in r.items %}
+    <br>
+    <h2>{{i}}</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr class="bg-success">
+                <th scope="col" style="font-size:24px">#</th>
+                <th scope="col" style="font-size:24px">STUDENT NAME</th>
+                <th scope="col" style="font-size:24px">BRANCH</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for c in j %}
+            <tr>
+                <th scope="row">{{c.student.s_id}}</th>
+                <td style="font-size:20px">{{c.student.user.username}}</td>
+                <td style="font-size:20px">{{c.student.b_id.b_name}}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

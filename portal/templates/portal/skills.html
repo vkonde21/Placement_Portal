@@ -1,0 +1,119 @@
+{% extends "portal/basic.html" %} {% load crispy_forms_tags %} {% block head %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% endblock %} {% block body %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<style>
+    .col-md-3 {
+        display: inline-block;
+        margin-left: -4px;
+    }
+    
+    .carousel-indicators .active {
+        background-color: blue;
+    }
+    
+    .col-md-3 img {
+        width: 255px;
+        height: 355px;
+    }
+    
+    body .carousel-indicator li {
+        background-color: blue;
+    }
+    
+    body .carousel-indicators {
+        bottom: 0;
+    }
+    
+    body .carousel-control-prev-icon,
+    body .carousel-control-next-icon {
+        background-color: blue;
+    }
+    
+    body .no-padding {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .carousel-control-next,
+    .carousel-control-prev {
+        top: auto;
+        bottom: auto;
+    }
+    
+    body .carousel-control-prev-icon,
+    body .carousel-control-next-icon {
+        background-color: blue;
+        margin-top: 222px;
+    }
+</style>
+
+
+<div class="container mt-3" style="max-width: 700px;">
+    <form method="POST" action='/addskills/'> {% csrf_token %}
+        <input type="hidden" id='am' name="am">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="inputFormRow">
+                    <div class="input-group mb-3">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Enter Skill:</label>
+                            <input type='text' id="skill1" name="skill1" required><br>
+                            <label for="semselect1">Select Rating:</label>
+                            <select class="form-control" name="rating1">
+                                {% for i in range %}
+                                <option>{{i}}</option>
+                                {% endfor %}
+                            </select><br>
+                            <button id="removeRow" type="button" class="btn btn-danger mx-3">Remove</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="newRow"></div>
+                <button id="addRow" type="button" class="btn btn-info">Add Skill</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-outline-info my-3" id='comp' type="submit">Save Skills</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %} {% block js %}
+<script type="text/javascript">
+    // add row
+    var a = 2;
+    var jsono = {
+        1: 1
+    };
+
+    $("#addRow").click(function() {
+
+        if ((a in jsono)) {
+            while ((a in jsono)) {
+                a = a + 1;
+            }
+        }
+        var html = '';
+        html += '<div id="inputFormRow">';
+        html += '<div class="input-group mb-3">';
+        html += '<div class="form-group"><label for="exampleFormControlSelect' + a + '">Enter Skill:</label><input type="text" id="skill' + a + '" name="skill' + a + '" required><br>';
+        html += '<label for="semselect' + a + '">Select Rating:</label><select class="form-control" name="rating' + a + '"> {% for i in range %}<option> {{i}} </option> {% endfor %} </select><br>'
+        html += '<button id="removeRow" type="button" class="btn btn-danger mx-3">Remove</button>';
+        html += '</div>';
+        a = a + 1
+        $('#newRow').append(html);
+        //$("#am").val(a)
+    });
+
+    // remove row
+    $(document).on('click', '#removeRow', function() {
+        $(this).closest('#inputFormRow').remove();
+    });
+
+    $("#comp").click(function() {
+        $("#am").val(a)
+    });
+</script>
+{% endblock %}
