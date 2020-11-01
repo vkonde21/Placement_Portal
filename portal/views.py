@@ -118,6 +118,9 @@ def profile(request):
 def academicdetails(request):
     if(request.method == "POST"):
         s = request.user.student
+        a = Academics.objects.filter(student = s)
+        for i in a:
+            i.delete()
         for i in range(1, s.curr_sem):
             c = request.POST["sem"+str(i)]
             a = Academics(student = request.user.student, semester = i, cgpa = c)

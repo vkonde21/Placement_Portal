@@ -1,115 +1,133 @@
 {% extends 'portal/basic.html' %} {% load crispy_forms_tags %} {% block body %}
 <style>
-.register{
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
-    margin-top: 3%;
-    padding: 3%;
-}
-.register-left{
-    text-align: center;
-    color: #fff;
-    margin-top: 4%;
-}
-.register-left input{
-    border: none;
-    border-radius: 1.5rem;
-    padding: 2%;
-    width: 60%;
-    background: #f8f9fa;
-    font-weight: bold;
-    color: #383d41;
-    margin-top: 30%;
-    margin-bottom: 3%;
-    cursor: pointer;
-}
-.register-right{
-    background: #f8f9fa;
-    border-top-left-radius: 10% 50%;
-    border-bottom-left-radius: 10% 50%;
-}
-.register-left img{
-    margin-top: 15%;
-    margin-bottom: 5%;
-    width: 25%;
-    -webkit-animation: mover 2s infinite  alternate;
-    animation: mover 1s infinite  alternate;
-}
-@-webkit-keyframes mover {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-20px); }
-}
-@keyframes mover {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-20px); }
-}
-.register-left p{
-    font-weight: lighter;
-    padding: 12%;
-    margin-top: -9%;
-}
-.register .register-form{
-    padding: 10%;
-    margin-top: 10%;
-}
-.btnRegister{
-    float: right;
-    margin-top: 10%;
-    border: none;
-    border-radius: 1.5rem;
-    padding: 2%;
-    background: #0062cc;
-    color: #fff;
-    font-weight: 600;
-    width: 50%;
-    cursor: pointer;
-}
-.register .nav-tabs{
-    margin-top: 3%;
-    border: none;
-    background: #0062cc;
-    border-radius: 1.5rem;
-    width: 28%;
-    float: right;
-}
-.register .nav-tabs .nav-link{
-    padding: 2%;
-    height: 34px;
-    font-weight: 600;
-    color: #fff;
-    border-top-right-radius: 1.5rem;
-    border-bottom-right-radius: 1.5rem;
-}
-.register .nav-tabs .nav-link:hover{
-    border: none;
-}
-.register .nav-tabs .nav-link.active{
-    width: 100px;
-    color: #0062cc;
-    border: 2px solid #0062cc;
-    border-top-left-radius: 1.5rem;
-    border-bottom-left-radius: 1.5rem;
-}
-.register-heading{
-    text-align: center;
-    margin-top: 8%;
-    margin-bottom: -15%;
-    color: #495057;
-}
+    @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900);
+    @import "compass";
+    $primary-color: #FF512F;
+    $secondary-color: #333;
+    $form-bg: #fff;
+    .contact-form {
+        margin-top: 30px;
+        .input-block {
+            background-color: rgba(white, .8);
+            border: solid 1px $primary-color;
+            width: 100%;
+            height: 60px;
+            padding: 25px;
+            position: relative;
+            margin-bottom: 20px;
+            @include transition(all 0.3s ease-out);
+            &.focus {
+                background-color: $form-bg;
+                border: solid 1px darken($primary-color, 10%);
+            }
+            &.textarea {
+                height: auto;
+                .form-control {
+                    height: auto;
+                    resize: none;
+                }
+            }
+            label {
+                position: absolute;
+                left: 25px;
+                top: 25px;
+                display: block;
+                margin: 0;
+                font-weight: 300;
+                z-index: 1;
+                color: $secondary-color;
+                font-size: 18px;
+                line-height: 10px;
+            }
+            .form-control {
+                background-color: transparent;
+                padding: 0;
+                border: none;
+                @include border-radius(0);
+                @include box-shadow(none);
+                height: auto;
+                position: relative;
+                z-index: 2;
+                font-size: 18px;
+                color: $secondary-color;
+            }
+            .form-control:focus {
+                label {
+                    top: 0;
+                }
+            }
+        }
+        .square-button {
+            background-color: rgba(white, .8);
+            color: darken($primary-color, 10%);
+            font-size: 26px;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-align: center;
+            @include border-radius(2px);
+            @include transition(all 0.3s ease);
+            padding: 0 60px;
+            height: 60px;
+            border: none;
+            width: 100%;
+            &:hover,
+            &:focus {
+                background-color: white;
+            }
+        }
+    }
+    
+    //tablet and above devices
+    @media (min-width: 768px) {
+        .contact-wrap {
+            width: 60%;
+            margin: auto;
+        }
+    }
+    
+    body {
+        @include background-image(linear-gradient(to right, $primary-color, #DD2476));
+        font-family: 'Roboto', sans-serif;
+    }
+    
+    .contact-wrap {
+        padding: 15px;
+    }
+    
+    h1 {
+        background-color: white;
+        color: lighten($primary-color, 10%);
+        padding: 40px;
+        margin: 0 0 50px;
+        font-size: 30px;
+        text-transform: uppercase;
+        font-weight: 700;
+        text-align: center;
+        small {
+            font-size: 18px;
+            display: block;
+            text-transform: none;
+            font-weight: 300;
+            margin-top: 10px;
+            color: lighten($primary-color, 10%);
+        }
+    }
 </style>
-<div align="center">
-<div style="width: 500px; ;align:center;  border: black 3px solid;" class="my-2" >
+
+<div style="background-color: blueviolet;" class="container">
     <div class="content-section">
         <div class="media">
             <img class="rounded-circle account-img" src="{{ user.student.personaldetails.photo.url }}">
             <div class="media-body">
                 <h2 class="account-heading">{{user.username}}</h2>
-                <p class="text-secondary">{{user.email}}</p>
+                <p class="account-heading">{{user.email}}</p>
             </div>
         </div>
     </div>
+
     <form method="POST" enctype="multipart/form-data">
         {%csrf_token%}
-        <fieldset class="form-group">
+        <!--fieldset class="form-group">
             <legend class='border-bottom mb-4'>
                 Profile Info
             </legend>
@@ -118,15 +136,95 @@
                 {% if s %}
                 {{p_form | crispy}} {{d_form | crispy}}
                 {% endif %}
-        </fieldset>
+        </fieldset-->
+        <section class="contact-wrap">
+            <div class="contact-form">
+                <h3> Account Details </h3>
+                <div class="col-md-6">
+                    <div class="input-block">
+                        {{u_form.username | as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="input-block">
+
+                        {{u_form.email | as_crispy_field}}
+                    </div>
+                </div>
+            </div>
+            {% if s %}
+            <div class="contact-form">
+                <div class="col-sm-12">
+                    <h3> Educational Details </h3>
+                    <div class="input-block">
+                        {{p_form.resume | as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="input-block">
+                        {{p_form.b_id | as_crispy_field}}
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="input-block">
+                        {{p_form.curr_year | as_crispy_field}}
+                    </div>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class="input-block">
+                        {{p_form.curr_sem | as_crispy_field}}
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3>Personal Details</h3>
+                <div class="col-sm-6">
+                    <div class="input-block">
+                        {{d_form.gender| as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="input-block">
+                        {{d_form.dob | as_crispy_field}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="input-block">
+                        {{d_form.category | as_crispy_field}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="input-block">
+                        {{d_form.photo | as_crispy_field}}
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="input-block">
+                        {{d_form.address | as_crispy_field}}
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <div class="input-block">
+                        {{d_form.phone | as_crispy_field}}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+        </section>
         <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Update</button>
+            <button class="btn btn-info mb-3" type="submit">Update</button>
         </div>
 
     </form>
-</div>
+
 </div>
 {% if s %}
-<a href="/academicinfo" class="btn btn-primary btn-lg active my-3 mx-3" role="button" aria-pressed="true">Update academic details</a> 
-{% endif %}
-{% endblock body %}
+<a href="/academicinfo" class="btn btn-primary btn-lg active my-3 mx-3" role="button" aria-pressed="true">Update academic details</a> {% endif %} {% endblock body %}

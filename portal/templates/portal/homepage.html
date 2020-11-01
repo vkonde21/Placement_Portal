@@ -70,22 +70,26 @@
                 </nav>
             </div>
         </div>
-        {% else %} {% for i in companies %}
-        <div class="card mx-3 my-3" style="width: 18rem;border:20px;border-color:black">
-            <img class="card-img-top" src="{{i.company.logo.url}}" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">{{i.company.c_name}}</h5>
-                <p class="card-text">CTC: Rs.{{i.company.ctc}}</p>
-                <a href="/viewdetails/{{i.company.c_id}}" class="btn btn-primary">View Details</a> {% if i.status == 3 %}
-                <a href="#" class="btn btn-primary">Selected</a> {% elif i.status == 1 %}
-                <a href="/apply/{{i.company.c_id}}" class='btn btn-primary mx-3'>Apply</a> {% elif i.status == 4 %}
-                <a href="#" class="btn btn-primary">Not Selected</a> {% elif i.status == 5%}
-                <a href="/withdraw/{{i.company.c_id}}" class="btn btn-primary mx-3">Withdraw</a> {% elif i.status == 6%}
-                <a href="#" class="btn btn-primary">Not Applied</a> {% else %}
-                <a href="#" class='btn btn-primary'>Not eligible</a> {% endif %}
+        {% else %}
+        <div class="row">
+            {% for i in companies %}
+            <div class="card mx-3 my-3" style="width: 18rem;border:20px;border-color:black">
+                <img class="card-img-top" src="{{i.company.logo.url}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{i.company.c_name}}</h5>
+                    <p class="card-text">CTC: Rs.{{i.company.ctc}}</p>
+                    <a href="/viewdetails/{{i.company.c_id}}" class="btn btn-primary">View Details</a> {% if i.status == 3 %}
+                    <a href="#" class="btn btn-primary">Selected</a> {% elif i.status == 1 %}
+                    <a href="/apply/{{i.company.c_id}}" class='btn btn-primary mx-3'>Apply</a> {% elif i.status == 4 %}
+                    <a href="#" class="btn btn-primary">Not Selected</a> {% elif i.status == 5%}
+                    <a href="/withdraw/{{i.company.c_id}}" class="btn btn-primary mx-3">Withdraw</a> {% elif i.status == 6%}
+                    <a href="#" class="btn btn-primary">Not Applied</a> {% else %}
+                    <a href="#" class='btn btn-primary'>Not eligible</a> {% endif %}
+                </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %} {% endif %} {% if msg %}
+        {% endif %} {% if msg %}
         <div class="alert alert-info">
             <strong>Info!</strong> {{msg}}
         </div>

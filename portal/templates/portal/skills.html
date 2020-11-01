@@ -3,6 +3,13 @@
 {% endblock %} {% block body %}
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <style>
+    .header {
+        text-align: center;
+        background: #1abc9c;
+        color: white;
+        font-size: 30px;
+    }
+    
     .col-md-3 {
         display: inline-block;
         margin-left: -4px;
@@ -49,37 +56,46 @@
 </style>
 
 
-<div class="container mt-3" style="max-width: 700px;">
-    <form method="POST" action='/addskills/'> {% csrf_token %}
-        <input type="hidden" id='am' name="am">
-        <div class="row">
-            <div class="col-lg-12">
-                <div id="inputFormRow">
-                    <div class="input-group mb-3">
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Enter Skill:</label>
-                            <input type='text' id="skill1" name="skill1" required><br>
-                            <label for="semselect1">Select Rating:</label>
-                            <select class="form-control" name="rating1">
+
+<div class="container" style="margin-top: 3%; margin-left: 3%;max-width: 700px; bg-color">
+    <div class="row p-3 mb-2 bg-dark text-white">
+        <div class="col-md-6" style="margin-top: 1%">
+
+            <center>
+                <h2>Skills</h2>
+            </center>
+
+            <form method="POST" action='/addskills/'> {% csrf_token %}
+                <input type="hidden" id='am' name="am">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div id="inputFormRow">
+                            <div class="input-group mb-3">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1"><b>Enter Skill:</b></label>
+                                    <input type='text' id="skill1" name="skill1" required><br>
+                                    <label for="semselect1"><b>Select Rating:</b></label>
+                                    <select class="form-control" name="rating1">
                                 {% for i in range %}
                                 <option>{{i}}</option>
                                 {% endfor %}
                             </select><br>
-                            <button id="removeRow" type="button" class="btn btn-danger mx-3">Remove</button>
+                                    <button id="removeRow" type="button" class="btn btn-danger mx-3">Remove</button>
+                                </div>
+                            </div>
                         </div>
+                        <div id="newRow"></div>
+                        <button id="addRow" type="button" class="btn btn-info">Add Skill</button>
                     </div>
                 </div>
-                <div id="newRow"></div>
-                <button id="addRow" type="button" class="btn btn-info">Add Skill</button>
-            </div>
-        </div>
 
-        <div class="form-group">
-            <button class="btn btn-outline-info my-3" id='comp' type="submit">Save Skills</button>
+                <div class="form-group">
+                    <button class="btn btn-outline-info my-3" id='comp' type="submit">Save Skills</button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
-
 {% endblock %} {% block js %}
 <script type="text/javascript">
     // add row
