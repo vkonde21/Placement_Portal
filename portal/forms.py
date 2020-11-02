@@ -29,11 +29,13 @@ class StudentUpdateForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = ['resume', 'curr_year', 'curr_sem', 'b_id']
+        labels = {'curr_year':'Current Year', 'curr_sem':'Current Semester', 'b_id':'Branch'}
 
 class PersonalDetailsForm(forms.ModelForm):
     class Meta:
         model = Personaldetails
         fields = ['gender', 'dob', 'category', 'photo', 'address', 'phone']
+        labels = {'dob': 'Date of Birth'}
 
 class SkillsForm(forms.ModelForm):
     class Meta:
@@ -49,6 +51,7 @@ class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
         fields = ['c_name', 'address', 'contact', 'ctc', 'doa', 'recruitment_details', 'logo']
+        labels = {'c_name':'Company Name', 'doa':'Date of Arrival', 'recruitment details':'Recruitment Details'}
 
 
 class CompanyUpdateForm(forms.ModelForm):

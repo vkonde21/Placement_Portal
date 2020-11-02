@@ -47,20 +47,20 @@
 </style>
 
 <div class="container mt-3">
-<form method="POST">  {% csrf_token %}
- <div class="card my-3">
-    
-    {% for i in f %}
-        <h5 class="card-title">Semester {{i}}</h5>
-        <div class="card-body">
-        <label for="cgpa{{i}}">Enter cgpa:</label>
-        <input type="number" step="0.01" id="sem{{i}}" name="sem{{i}}"  required>
+    <h1>Academic Details</h1>
+    <form method="POST"> {% csrf_token %}
+        <div class="card my-3">
+            {% for i in f %}
+            <h5 class="card-title"><b>Semester {{i}}</b></h5>
+            <div class="card-body">
+                <label for="cgpa{{i}}"><b>Enter cgpa:</b></label>
+                <input type="number" step="0.01" id="sem{{i}}" name="sem{{i}}" required>
+            </div>
+            {% endfor %}
+            <button type="submit" formaction="/academicinfo" class="btn btn-primary mx-5 my-3">Save details</button>
         </div>
-    {% endfor %}
-     <button type="submit" formaction="/academicinfo" class="btn btn-primary mx-5 my-3">Save details</button>
-     </div>
-    
-</form>
+
+    </form>
 </div>
 
 {% endblock %}

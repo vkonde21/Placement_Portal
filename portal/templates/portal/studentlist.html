@@ -48,50 +48,44 @@
 
 <div class="container mt-3">
 
-{% if final %}
-    <form method='POST' action='/results/{{id}}'>{% csrf_token %}
-{% endif %}
-{% if shortlist %}
-    <form method='POST' action='/selectlist/{{id}}'>{% csrf_token %}
-{% endif %}
+    {% if final %}
+    <form method='POST' action='/results/{{id}}'>{% csrf_token %} {% endif %} {% if shortlist %}
+        <form method='POST' action='/selectlist/{{id}}'>{% csrf_token %} {% endif %} {% if final or shortlist %}
 
-{% if final or shortlist %}
+            <input type="hidden" id="am" name="am" value="{{round1}}">
+            <table class="table table-striped">
+                <thead>
+                    <tr class="bg-success">
+                        <th scope="col" style="font-size:24px">#</th>
+                        <th scope="col" style="font-size:24px">STUDENT NAME</th>
+                        <th scope="col" style="font-size:24px">BRANCH</th>
+                        <th scope="col" style="font-size:24px">PROFILE</th>
+                        <th scope="col" style="font-size:24px">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in apps %}
+                    <tr>
+                        <th scope="row">{{c.student.s_id}}</th>
+                        <td style="font-size:20px">{{c.student.user.username}}</td>
+                        <td style="font-size:20px">{{c.student.b_id.b_name}}</td>
+                        <td>
+                            <a href="#" class="btn btn-primary">View Details</a>
+                        </td>
+                        <td>
 
-        <input type="hidden" id="am" name="am" value="{{round1}}">
-        <table class="table table-striped">
-            <thead>
-                <tr class="bg-success">
-                    <th scope="col" style="font-size:24px">#</th>
-                    <th scope="col" style="font-size:24px">STUDENT NAME</th>
-                    <th scope="col" style="font-size:24px">BRANCH</th>
-                    <th scope="col" style="font-size:24px">PROFILE</th>
-                    <th scope="col" style="font-size:24px">ACTION</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for c in apps %}
-                <tr>
-                    <th scope="row">{{c.student.s_id}}</th>
-                    <td style="font-size:20px">{{c.student.user.username}}</td>
-                    <td style="font-size:20px">{{c.student.b_id.b_name}}</td>
-                    <td>
-                        <a href="#" class="btn btn-primary">View Details</a>
-                    </td>
-                    <td>
-                        <a href="#"><span><i class="fa fa-edit" style="font-size:30px;color:purple" aria-hidden="true"></i></span></a>&nbsp;&nbsp;
-                        <a href="#"><span><i class="fa fa-trash" style="font-size:30px;color:maroon" aria-hidden="true"></i></span></a>&nbsp;&nbsp;
-                        <input type="checkbox" name="name" value='{{c.student.s_id}}' />&nbsp;
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <div class="form-group">
-            <button class="btn btn-outline-info my-3" id='comp' type="submit">Create Shortlist</button>
-        </div>
-    </form>
+                            <input type="checkbox" name="name" value='{{c.student.s_id}}' />&nbsp;
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="form-group">
+                <button class="btn btn-outline-info my-3" id='comp' type="submit">Create Shortlist</button>
+            </div>
+        </form>
 
-    {% else %}
+        {% else %}
 
         <table class="table table-striped">
             <thead>
@@ -121,9 +115,7 @@
                 {% endfor %}
             </tbody>
         </table>
-    {% endif %}
+        {% endif %}
 </div>
 
-{% endblock %} {% block js %}
-
-{% endblock %}
+{% endblock %} {% block js %} {% endblock %}

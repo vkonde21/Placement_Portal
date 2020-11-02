@@ -149,18 +149,18 @@ def academicdetails(request):
 def addskills(request):
     if(request.method == 'POST'):
         a = request.POST.get('am')
-        #try:
-        for i in range(1, int(a) + 1):
-            sname = request.POST.get("skill" + str(i))
-            rating = request.POST.get("rating" + str(i))
-            print(sname)
-            print(rating)
-            '''if(sname != None and rating != None):
-                s = Skills(skill_name = sname, rating = rating, student = request.user.student)
-                s.save()'''
-        messages.success(request, 'Your skills have been saved!!!')
-        #except:
-            #messages.error(request,"An error occured!!")
+        try:
+            for i in range(1, int(a) + 1):
+                sname = request.POST.get("skill" + str(i))
+                rating = request.POST.get("rating" + str(i))
+                print(sname)
+                print(rating)
+                if(sname != None and rating != None):
+                    s = Skills(skill_name = sname, rating = rating, student = request.user.student)
+                    s.save()
+            messages.success(request, 'Your skills have been saved!!!')
+        except:
+            messages.error(request,"An error occured!!")
         return redirect('/home')
 
 
