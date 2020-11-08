@@ -47,6 +47,8 @@ Students can:
   ![.](https://github.com/vkonde21/Placement_Portal/blob/master/screenshots/homepage.png)
   ![.](https://github.com/vkonde21/Placement_Portal/blob/master/screenshots/yourstatus.png)
   ![.](https://github.com/vkonde21/Placement_Portal/blob/master/screenshots/academicdetails.png)
+  ![.](https://github.com/vkonde21/Placement_Portal/blob/master/screenshots/skills.png)
+  ![.](https://github.com/vkonde21/Placement_Portal/blob/master/screenshots/profile.png)
   ![.](https://github.com/vkonde21/Placement_Portal/blob/master/screenshots/adminhome.png)
   ![.](https://github.com/vkonde21/Placement_Portal/blob/master/screenshots/addcompany.png)
   ![.](https://github.com/vkonde21/Placement_Portal/blob/master/screenshots/companycriteria.png)
